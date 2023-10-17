@@ -9,9 +9,11 @@ import dao.ContactDAO;
 import dao.GroupDAO;
 import entity.Contact;
 import entity.Group;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -89,21 +91,21 @@ public class ContactController {
 
     public void showContact(List<Contact> c) {
         this.tblContact.getItems().clear();
-        String group = ((Group)this.cbGroup.getSelectionModel().getSelectedItem()).getName();
+        String group = ((Group) this.cbGroup.getSelectionModel().getSelectedItem()).getName();
         Iterator var3;
         Contact x;
         if (group.equals("All")) {
             var3 = c.iterator();
 
-            while(var3.hasNext()) {
-                x = (Contact)var3.next();
+            while (var3.hasNext()) {
+                x = (Contact) var3.next();
                 this.tblContact.getItems().add(x);
             }
         } else {
             var3 = c.iterator();
 
-            while(var3.hasNext()) {
-                x = (Contact)var3.next();
+            while (var3.hasNext()) {
+                x = (Contact) var3.next();
                 if (x.getGroup().equalsIgnoreCase(group)) {
                     this.tblContact.getItems().add(x);
                 }
@@ -116,8 +118,8 @@ public class ContactController {
         this.cbGroup.getItems().add(new Group("All"));
         Iterator var2 = g.iterator();
 
-        while(var2.hasNext()) {
-            Group x = (Group)var2.next();
+        while (var2.hasNext()) {
+            Group x = (Group) var2.next();
             this.cbGroup.getItems().add(x);
         }
 
@@ -126,17 +128,17 @@ public class ContactController {
 
     public void searchContact(ActionEvent evt) throws Exception {
         if (evt.getSource() == this.btnSearch) {
-            String group = ((Group)this.cbGroup.getSelectionModel().getSelectedItem()).getName();
+            String group = ((Group) this.cbGroup.getSelectionModel().getSelectedItem()).getName();
             List<Contact> c = this.contactDAO.search(this.contacts, group, this.search.getText());
             this.showContact(c);
         } else if (evt.getSource() == this.btnAdd) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../ui/addContact.fxml"));
-            Parent root = (Parent)loader.load();
+            Parent root = (Parent) loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Add a new Contact");
             stage.show();
-            AddContactController c = (AddContactController)loader.getController();
+            AddContactController c = (AddContactController) loader.getController();
             c.setContacts(this.contacts);
             c.setAddContactController(this);
         } else if (evt.getSource() == this.btnDelete) {
@@ -151,12 +153,12 @@ public class ContactController {
 
     public void groupPanel() throws Exception {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../ui/group.fxml"));
-        Parent root = (Parent)loader.load();
+        Parent root = (Parent) loader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.setTitle("Group a Management");
         stage.show();
-        GroupController c = (GroupController)loader.getController();
+        GroupController c = (GroupController) loader.getController();
         c.setContactController(this);
     }
 
@@ -164,15 +166,15 @@ public class ContactController {
         int i = this.tblContact.getSelectionModel().getSelectedIndex();
         if (i < this.tblContact.getItems().size() && i >= 0) {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../ui/updateContact.fxml"));
-            Parent root = (Parent)loader.load();
+            Parent root = (Parent) loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.setTitle("Update a Contact");
             stage.show();
-            UpdateContactController c = (UpdateContactController)loader.getController();
+            UpdateContactController c = (UpdateContactController) loader.getController();
             c.setContacts(this.contacts);
             c.setContactController(this);
-            c.setUpdatedContact((Contact)this.tblContact.getItems().get(i));
+            c.setUpdatedContact((Contact) this.tblContact.getItems().get(i));
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Information");

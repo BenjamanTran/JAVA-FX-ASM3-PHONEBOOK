@@ -8,11 +8,13 @@ package controller;
 import dao.GroupDAO;
 import entity.Contact;
 import entity.Group;
+
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -76,8 +78,8 @@ public class AddContactController {
         this.cbGroup.getItems().clear();
         Iterator var1 = (new GroupDAO()).loadGroup("data/group.txt").iterator();
 
-        while(var1.hasNext()) {
-            Group x = (Group)var1.next();
+        while (var1.hasNext()) {
+            Group x = (Group) var1.next();
             this.cbGroup.getItems().add(x);
         }
 
@@ -102,8 +104,8 @@ public class AddContactController {
                     if (!mtch.matches()) {
                         this.lblEmail.setText("Email is invalid");
                     } else {
-                        String birthdate = ((LocalDate)this.dob.getValue()).toString();
-                        String group = ((Group)this.cbGroup.getSelectionModel().getSelectedItem()).getName();
+                        String birthdate = ((LocalDate) this.dob.getValue()).toString();
+                        String group = ((Group) this.cbGroup.getSelectionModel().getSelectedItem()).getName();
                         Contact c = new Contact(fname, lname, mobile, mail, birthdate, group);
                         Alert alert;
                         if (this.contactController.contactDAO.indexOf(this.contacts, c) == -1) {
@@ -133,8 +135,8 @@ public class AddContactController {
         if (evt.getSource() == this.btnAdd) {
             this.saveContact();
         } else if (evt.getSource() == this.btnClose) {
-            Node source = (Node)evt.getSource();
-            Stage stage = (Stage)source.getScene().getWindow();
+            Node source = (Node) evt.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
         }
     }

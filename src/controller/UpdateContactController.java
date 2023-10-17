@@ -8,6 +8,7 @@ package controller;
 import dao.GroupDAO;
 import entity.Contact;
 import entity.Group;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -16,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -79,8 +81,8 @@ public class UpdateContactController {
         this.cbGroup.getItems().clear();
         Iterator var2 = (new GroupDAO()).loadGroup("data/group.txt").iterator();
 
-        while(var2.hasNext()) {
-            Group x = (Group)var2.next();
+        while (var2.hasNext()) {
+            Group x = (Group) var2.next();
             this.cbGroup.getItems().add(x);
         }
 
@@ -115,8 +117,8 @@ public class UpdateContactController {
                     if (!mtch.matches()) {
                         this.lblEmail.setText("Email is invalid");
                     } else {
-                        String birthdate = ((LocalDate)this.dob.getValue()).toString();
-                        String group = ((Group)this.cbGroup.getSelectionModel().getSelectedItem()).getName();
+                        String birthdate = ((LocalDate) this.dob.getValue()).toString();
+                        String group = ((Group) this.cbGroup.getSelectionModel().getSelectedItem()).getName();
                         Contact c = new Contact(fname, lname, mobile, mail, birthdate, group);
                         int i = this.contactController.contactDAO.indexOf(this.contacts, this.updatedContact);
                         int j = this.contactController.contactDAO.indexOf(this.contacts, c);
@@ -148,8 +150,8 @@ public class UpdateContactController {
         if (evt.getSource() == this.btnAdd) {
             this.saveContact();
         } else if (evt.getSource() == this.btnClose) {
-            Node source = (Node)evt.getSource();
-            Stage stage = (Stage)source.getScene().getWindow();
+            Node source = (Node) evt.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
         }
 

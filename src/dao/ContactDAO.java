@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Contact;
+
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -23,7 +24,7 @@ public class ContactDAO {
         LineNumberReader lnr = new LineNumberReader(new FileReader(fname));
         String line = "";
 
-        while((line = lnr.readLine()) != null) {
+        while ((line = lnr.readLine()) != null) {
             line = line.trim();
             if (!line.isEmpty()) {
                 String[] st = line.split(":");
@@ -39,8 +40,8 @@ public class ContactDAO {
         BufferedWriter bw = new BufferedWriter(new FileWriter(fname));
         Iterator var4 = g.iterator();
 
-        while(var4.hasNext()) {
-            Contact x = (Contact)var4.next();
+        while (var4.hasNext()) {
+            Contact x = (Contact) var4.next();
             bw.write(x.toString());
         }
 
@@ -48,8 +49,8 @@ public class ContactDAO {
     }
 
     public int indexOf(List<Contact> list, Contact g) {
-        for(int i = 0; i < list.size(); ++i) {
-            Contact x = (Contact)list.get(i);
+        for (int i = 0; i < list.size(); ++i) {
+            Contact x = (Contact) list.get(i);
             if (x.getFirstName().equalsIgnoreCase(g.getFirstName()) && x.getLastName().equalsIgnoreCase(g.getLastName())) {
                 return i;
             }
@@ -63,7 +64,7 @@ public class ContactDAO {
     }
 
     public void updateContact(List<Contact> list, Contact c, int i) {
-        Contact x = (Contact)list.get(i);
+        Contact x = (Contact) list.get(i);
         x.setDob(c.getDob());
         x.setEmail(c.getEmail());
         x.setFirstName(c.getFirstName());
@@ -80,8 +81,8 @@ public class ContactDAO {
         List<Contact> ct = new Vector();
         Iterator var5 = c.iterator();
 
-        while(var5.hasNext()) {
-            Contact x = (Contact)var5.next();
+        while (var5.hasNext()) {
+            Contact x = (Contact) var5.next();
             String s = x.toString().toLowerCase();
             if (s.contains(search.toLowerCase()) && x.getGroup().contains(group)) {
                 ct.add(x);
@@ -98,8 +99,8 @@ public class ContactDAO {
             List<Contact> ct = new Vector();
             Iterator var4 = c.iterator();
 
-            while(var4.hasNext()) {
-                Contact x = (Contact)var4.next();
+            while (var4.hasNext()) {
+                Contact x = (Contact) var4.next();
                 String s = x.getGroup().toLowerCase();
                 if (s.contains(group.toLowerCase())) {
                     ct.add(x);

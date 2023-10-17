@@ -7,9 +7,11 @@ package controller;
 
 import dao.GroupDAO;
 import entity.Group;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -62,7 +64,7 @@ public class GroupController {
             this.tblGroup.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Group>() {
                 public void changed(ObservableValue<? extends Group> observable, Group oldValue, Group newValue) {
                     if (GroupController.this.tblGroup.getSelectionModel().getSelectedItem() != null) {
-                        GroupController.this.groupName.setText(((Group)GroupController.this.tblGroup.getSelectionModel().getSelectedItem()).getName());
+                        GroupController.this.groupName.setText(((Group) GroupController.this.tblGroup.getSelectionModel().getSelectedItem()).getName());
                     }
 
                 }
@@ -139,7 +141,7 @@ public class GroupController {
     public void deleteAction() throws Exception {
         int i = this.tblGroup.getSelectionModel().getSelectedIndex();
         if (i >= 0 && i < this.tblGroup.getItems().size()) {
-            int size = ((Group)this.tblGroup.getItems().get(i)).contacts().size();
+            int size = ((Group) this.tblGroup.getItems().get(i)).contacts().size();
             Alert alert;
             if (size > 0) {
                 alert = new Alert(AlertType.ERROR);
@@ -176,8 +178,8 @@ public class GroupController {
         } else if (evt.getSource() == this.btnDelete) {
             this.deleteAction();
         } else if (evt.getSource() == this.btnClose) {
-            Node source = (Node)evt.getSource();
-            Stage stage = (Stage)source.getScene().getWindow();
+            Node source = (Node) evt.getSource();
+            Stage stage = (Stage) source.getScene().getWindow();
             stage.close();
         }
 
@@ -188,8 +190,8 @@ public class GroupController {
             this.tblGroup.getItems().clear();
             Iterator var2 = groups.iterator();
 
-            while(var2.hasNext()) {
-                Group g = (Group)var2.next();
+            while (var2.hasNext()) {
+                Group g = (Group) var2.next();
                 this.tblGroup.getItems().add(g);
             }
         }

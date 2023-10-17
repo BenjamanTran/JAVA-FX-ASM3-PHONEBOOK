@@ -6,6 +6,7 @@
 package dao;
 
 import entity.Group;
+
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -23,7 +24,7 @@ public class GroupDAO {
         LineNumberReader lnr = new LineNumberReader(new FileReader(fname));
         String line = "";
 
-        while((line = lnr.readLine()) != null) {
+        while ((line = lnr.readLine()) != null) {
             line = line.trim();
             if (!line.isEmpty()) {
                 g.add(new Group(line));
@@ -38,8 +39,8 @@ public class GroupDAO {
         BufferedWriter bw = new BufferedWriter(new FileWriter(fname));
         Iterator var4 = g.iterator();
 
-        while(var4.hasNext()) {
-            Group x = (Group)var4.next();
+        while (var4.hasNext()) {
+            Group x = (Group) var4.next();
             bw.write(x.toString());
         }
 
@@ -47,8 +48,8 @@ public class GroupDAO {
     }
 
     public int indexOf(List<Group> list, Group g) {
-        for(int i = 0; i < list.size(); ++i) {
-            Group x = (Group)list.get(i);
+        for (int i = 0; i < list.size(); ++i) {
+            Group x = (Group) list.get(i);
             if (x.getName().equalsIgnoreCase(g.getName())) {
                 return i;
             }
@@ -65,8 +66,8 @@ public class GroupDAO {
         List<Group> ct = new Vector();
         Iterator var4 = c.iterator();
 
-        while(var4.hasNext()) {
-            Group x = (Group)var4.next();
+        while (var4.hasNext()) {
+            Group x = (Group) var4.next();
             String s = x.toString().toLowerCase();
             if (s.contains(search.toLowerCase())) {
                 ct.add(x);
@@ -80,8 +81,8 @@ public class GroupDAO {
         int c = 0;
         Iterator var4 = groups.iterator();
 
-        while(var4.hasNext()) {
-            Group x = (Group)var4.next();
+        while (var4.hasNext()) {
+            Group x = (Group) var4.next();
             if (x.getName().equalsIgnoreCase(newGroup.getName())) {
                 ++c;
             }
@@ -90,7 +91,7 @@ public class GroupDAO {
         if (c >= 2) {
             return false;
         } else {
-            Group g = (Group)groups.get(this.indexOf(groups, newGroup));
+            Group g = (Group) groups.get(this.indexOf(groups, newGroup));
             g.setName(newGroup.getName());
             return true;
         }
